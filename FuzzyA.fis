@@ -1,0 +1,57 @@
+[System]
+Name='FuzzyA'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=14
+AndMethod='min'
+OrMethod='max'
+ImpMethod='prod'
+AggMethod='sum'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Rainfall'
+Range=[0 20]
+NumMFs=4
+MF1='no_rain':'gaussmf',[0.07465 0.1121]
+MF2='heavy':'sigmf',[0.5001 8]
+MF3='light':'gaussmf',[2.498 0.8082]
+MF4='medium':'gaussmf',[2.484 5.075]
+
+[Input2]
+Name='Temperature'
+Range=[5 40]
+NumMFs=5
+MF1='very_cold':'sigmf',[-0.5 15]
+MF2='very_hot':'sigmf',[0.5 34.5]
+MF3='hot':'gaussmf',[3.333 29.08]
+MF4='cold':'gaussmf',[2.272 17.33]
+MF5='medium':'gaussmf',[3 22.5]
+
+[Output1]
+Name='Water'
+Range=[0 100]
+NumMFs=5
+MF1='minimal':'gaussmf',[0.9331 0.4014]
+MF2='medium':'gaussmf',[6.37 30]
+MF3='max':'gaussmf',[12.53 70.25]
+MF4='little':'gaussmf',[4.247 15]
+MF5='high':'gaussmf',[6.37 45]
+
+[Rules]
+0 1, 1 (1) : 1
+1 2, 3 (1) : 1
+1 5, 2 (1) : 1
+1 4, 4 (1) : 1
+1 3, 5 (1) : 1
+2 0, 1 (1) : 1
+3 2, 3 (0.5) : 1
+3 3, 5 (0.5) : 1
+4 2, 2 (1) : 1
+4 3, 4 (0.5) : 1
+3 5, 2 (0.25) : 1
+4 5, 1 (1) : 1
+3 4, 4 (0.25) : 1
+4 4, 1 (1) : 1
